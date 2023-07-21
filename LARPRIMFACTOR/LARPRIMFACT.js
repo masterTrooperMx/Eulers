@@ -5,22 +5,33 @@
  */
 
 console.time('LAPRIMFACT');
-const { isPrime, arrUpPrime } = require('../utils/math_utils'); // to detect prime numbers
-const max = 600851475143;
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
+process.stdin.on('data', cacheInput).on('end', main);
+const num = 600851475143;
+let input ='';
 let arr = [];
-let i = 1;
-while (i < max) {
-    let p = isPrime(i);
-    if(p && max%i == 0){
-        arr.push(i);
-        console.log(`${i} is prime factor of ${max}`);
-    } else if(p){
-        console.log(`${i} is just another prime`);
-    }
-    i++;
+
+function cacheInput(data) {
+    input += data;
 }
 
-const primes = arrUpPrime(max);
-console.log(`up to ${max}, are ${arr.length} primes that are factors ${arr}`);
+function prepareInput() {
+    input = input.split('\n');//map(Number);
+}
+
+function main() {
+    prepareInput();
+    console.log(`${input.length} lines`);
+    let maxP = input,length
+    for(let i = 0; i < maxP; i++){
+        let prime = Number(input.splice(0, 1)[0]);
+        if(max%prime == 0){ // it is a factor
+            arr.push(prime);
+            console.log(`${prime}`);
+        }
+    }
+}
+console.log(`${arr[-1]}`);
 console.timeEnd('LAPRIMFACT');
