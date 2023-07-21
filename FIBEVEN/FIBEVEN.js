@@ -6,27 +6,20 @@
  */
 
 console.time('FIBEVEN');
-let bigInt = require("big-integer");
-//const { sumArr } = require('../utils/math_utils'); // se va a quedar como suma normal
+//let bigInt = require("big-integer");
+const { fibonacci, isMult } = require('../utils/math_utils'); // my fibonacci functional
 
-let max = bigInt(4000);
-let arrFib = [];
-
-const fibonacci = (n, fn) => {
-    const sol = [0,1]; // base case
-
-    for(let i = 2; i <= n; i++){
-        sol[i] = sol[i-1] + sol[i-2]; // dynamically growing the array
-        console.log(sol[i], n);
-        fn(sol[i]);
+const max = 4000000;
+let i = 0;
+let fbi = fibonacci(i);
+let sum = 0;
+while (fbi <= max) {
+    if(isMult(String(fbi),2)){
+        console.log(`${i} = ${fbi}`);
+        sum += fbi;
     }
-    return sol[n];
+    i++;
+    fbi = fibonacci(i);
 }
-
-//console.log(fibonacci(10, (n) => { console.log(n%2) }));
-//let sumF = fibonacci(10, (n) => { arrFib.push(n) });
-let sumF = fibonacci(max, (n) => { if(n%2 == 0 && n < max){ arrFib.push(bigInt(n))} });
-//let sumF = fibonacci(10, (n) => true); // do nothing
-//console.log(sumF, arrFib, arrFib.reduce(function(x,y){return bigInt(x).plus(y)}));
-console.log(sumF, arrFib);
+console.log(`suma ${sum}`);
 console.timeEnd('FIBEVEN');

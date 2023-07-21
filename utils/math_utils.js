@@ -48,5 +48,6 @@ const fibonacci = (n) => {
 
 module.exports = {
     sumArr,
-    isMult
+    isMult, 
+    fibonacci
 }
