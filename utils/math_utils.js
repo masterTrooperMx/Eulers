@@ -18,16 +18,18 @@ const sumArr = (arr) => {
  */
 const isMult = (i, n) => {
     let isIt = false;
-    let tmp = i.split('');
-    if(n == 2){ // even number are those exactly divided by 2
+    let tmp = 0;
+    if(typeof(i) == "string"){
+        tmp = i.split('');
         tmp = Number(tmp.slice(-1));
+    }
+    if(n == 2){ // even number are those exactly divided by 2
         isIt = (tmp == 0 || tmp == 2 || tmp == 4 || tmp == 6 || tmp == 8) ? true : false;
     } else if(n == 3){
         tmp = sumArr(tmp);
         isIt = (tmp%n == 0) ? true : false;
         //isIt = (i%3 == 0) ? true : false; // takes longer time
     } else if( n == 5) {
-        tmp = Number(tmp.slice(-1));
         isIt = (tmp == 0 || tmp == 5) ? true : false;
     }
     return isIt;
@@ -46,8 +48,54 @@ const fibonacci = (n) => {
     return sol[n];
 }
 
+/**
+ * Prime positive numbers in array
+ */
+const isPrime = (num) => {
+    let Prime = true;
+    if(num == 1){
+        Prime = true
+    } else if(num > 1){
+        for(let i = 2; i < num; i++){
+            if(num%i == 0) {
+                Prime = false;
+                break;
+            }
+        }
+    }
+    return Prime;
+}
+
+// fills array with num prime numbers
+const arrPrimes = (num) => {
+    let arr = [];
+    for(let i = 1; i < num; i++){
+        if(isPrime(i)){
+            arr.push(i);
+        }
+    }
+    return arr;
+}
+
+// get array with prime numbers up to num
+const arrUpPrime = (num) => {
+    let arr = [];
+    let i = 1;
+    while (i < num) {
+        let p = isPrime(i);
+        if(p){
+            arr.push(i);
+        }
+        i++;
+    }
+    return arr;
+}
+
 module.exports = {
     sumArr,
     isMult, 
-    fibonacci
+    fibonacci,
+    isPrime,
+    arrPrimes,
+    arrUpPrime,
 }
