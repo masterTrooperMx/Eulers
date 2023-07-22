@@ -12,11 +12,11 @@ const max = 600851475143;
 let i = 1;
 while (i < max) {
     let p = isPrime(i);
-//    if(p && max%i == 0){
-//        arr.push(i);
-//        console.log(`${i} is prime factor of ${max}`);
-//    } else if(p){
-    if(p){
+    //    if(p && max%i == 0){
+    //        arr.push(i);
+    //        console.log(`${i} is prime factor of ${max}`);
+    //    } else if(p){
+    if (p) {
         console.log(`${i}`);
     }
     i++;
