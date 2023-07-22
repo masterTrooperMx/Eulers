@@ -24,10 +24,10 @@ function prepareInput() {
 function main() {
     prepareInput();
     console.log(`${input.length} lines`);
-    let maxP = input, length
+    let maxP = input.length;
     for (let i = 0; i < maxP; i++) {
         let prime = Number(input.splice(0, 1)[0]);
-        if (max % prime == 0) { // it is a factor
+        if (num % prime == 0) { // it is a factor
             arr.push(prime);
             console.log(`${prime}`);
         }
