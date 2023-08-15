@@ -22,10 +22,10 @@ function cacheInput(data) {
 }
 
 let T = 0;
-let nodes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-let vals = [3, 7, 4, 2, 4, 6, 8, 5, 9, 3];
-let levels = [0, 1, 1, 2, 2, 2, 3, 3, 3, 3];
-let links = [['B', 'C'], ['D', 'E'], ['E', 'F'], ['G', 'H'], ['H', 'I'], ['I', 'J'], [], [], [], []];
+let nodes = [];
+let vals = [];
+let levels = [];
+let links = [];
 let lattice = []; // lattice of nodes
 
 class Node {
@@ -57,13 +57,13 @@ function prepareInput() {
 function getMaxSum(sum, node) {// from array of nodes get max value fo sum and return node
     // check options
         let arrNxt = [];
-        arr = node.next; // just related to node ['X', 'Y']
+        arr = node?.next; // just related to node ['X', 'Y']
         console.log('in', sum, arr, node);
-        for(let i = 0; i < arr.length; i++){ // find the nodes linked to node
+        for(let i = 0; i < arr?.length; i++){ // find the nodes linked to node
             arrNxt.push(lattice.find(n => n.name === arr[i]));
         }
         //console.log('in', arrNxt);
-        let sMax = arrNxt.map(obj => obj.val+sum);
+        let sMax = arrNxt.map(obj => obj?.val+sum);
         //console.log(sMax);
         let max = Math.max(...sMax);
         let idx = sMax.indexOf(max);

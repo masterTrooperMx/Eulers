@@ -22,6 +22,21 @@ function prepareInput() {
     return tmp;
 }
 
+function genLinks(num) { // levels
+    let l = 1;
+    for(let i = 0; i < num; i++){
+        let str = '';
+        for(let j = 0; j < i; j++){
+            ++l;
+            str += `[n${l}, n${l+1}]\n`;
+        }
+        //console.log(`${i} ${l} ${str}`);
+        console.log(`${str}`);
+        str = '';
+        if(i >= 1) { ++l; }
+    }
+}
+
 function main() {
     lattice = prepareInput();
     console.log(lattice);
@@ -40,6 +55,8 @@ function main() {
     found = [];
     found = lattice.filter(n => n.name in tmp);
     console.log(found);
+
+    genLinks(15);
 }
 
 main();
