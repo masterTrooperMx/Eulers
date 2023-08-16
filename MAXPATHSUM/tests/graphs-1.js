@@ -1,4 +1,5 @@
-import { Graph } from "../models/Graph";
+// https://github.com/amejiarosario/dsa.js-data-structures-algorithms-javascript/blob/master/src/data-structures/graphs/graph.js
+const { Graph } = require("../models/Graph");
 
 const graph = new Graph(Graph.DIRECTED);
 
@@ -16,4 +17,4 @@ graph.addEdge(6, 9);
 graph.addEdge(6, 10);
 
 dfsFromFirst = graph.dfs(first);
-console.log(Array.from(dfsFromFirst));
+console.log(JSON.stringify(Array.from(dfsFromFirst), null, 2));

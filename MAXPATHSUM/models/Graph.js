@@ -1,5 +1,5 @@
 // https://adrianmejia.com/data-structures-for-beginners-graphs-time-complexity-tutorial/
-import { Stack } from "./Stack"; // load class 
+const { Stack } = require("./Stack"); // load class 
 
 class Node {
     constructor(value) {
