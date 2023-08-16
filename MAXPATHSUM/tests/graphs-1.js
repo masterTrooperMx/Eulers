@@ -16,5 +16,34 @@ graph.addEdge(5, 9);
 graph.addEdge(6, 9);
 graph.addEdge(6, 10);
 
-dfsFromFirst = graph.dfs(first);
-console.log(JSON.stringify(Array.from(dfsFromFirst), null, 2));
+console.log(graph);
+
+const dfsFromFirst = graph.dfs(first);
+//console.log(JSON.stringify(Array.from(dfsFromFirst), null, 2));
+const dfsPathsArr = Array.from(dfsFromFirst);
+console.log(dfsPathsArr);
+
+let str = '';
+function printGraph(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i].adjacents != []) {
+            str += `${arr[i].value}-`;
+            printGraph(arr[i].adjacents);
+        } else {
+            str += `\n`;
+        }
+    }
+}
+
+printGraph(dfsPathsArr);
+console.log(str);
+
+const vals = dfsPathsArr.map(node => node.value);
+console.log(`${vals}`);
+// all paths
+let aP = graph.findAllPaths(1, 8, null);
+//console.log(aP);
+//aP = null;
+aP = graph.findAllPaths(1, 7, null);
+aP = graph.findAllPaths(1, 9, null);
+console.log(aP);

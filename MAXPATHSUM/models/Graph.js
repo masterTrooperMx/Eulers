@@ -99,6 +99,29 @@ class Graph {
             }
         }
     }
+
+    findAllPaths(source, destination, path = new Map()) {
+        const sourceNode = this.nodes.get(source);
+        const destinationNode = this.nodes.get(destination);
+        const newPath = new Map(path);
+    
+        if (!destinationNode || !sourceNode) return [];
+    
+        newPath.set(sourceNode);
+    
+        if (source === destination) {
+          return [Array.from(newPath.keys())];
+        }
+    
+        const paths = [];
+        sourceNode.getAdjacents().forEach((node) => {
+          if (!newPath.has(node)) {
+            const nextPaths = this.findAllPaths(node.value, destination, newPath);
+            nextPaths.forEach((nextPath) => paths.push(nextPath));
+          }
+        });
+        return paths;
+    }
 };
 //
 Graph.UNDIRECTED = Symbol('undirected graph');
