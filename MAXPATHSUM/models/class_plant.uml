@@ -1,0 +1,33 @@
+@startuml
+class Stack {
+items : elementData[]
+void push(elementData)
+elementData pop()
+elementData peek(elementData)
+Boolean isEmpty()
+String printStack()
+}
+
+class Node {
+value: valueData
+adjacents: Node[]
+void addAdjacent(Node)
+Node removeAdjacent(Node)
+Node[] getAdjacents()
+Boolean isAdjacent(Node)
+}
+
+class Graph{
+nodes: Map
+edgeDirection: edgeDirection
+[sourceNode, destinationNode] addEdge(source: String, destination: String)
+Node addVertex(value: String)
+[node, adjacency] removeVertex(value: String)
+[sourceNode, destinationNode] removeEdge(source: String, destination: String)
+Node[] *dfs(first: String)
+Node[] findAllPaths(source: String, destination: String, path: Map)
+}
+
+Graph x--> "1..*" Node : "has" >
+Graph x--> "1" Stack : "uses" >
+@enduml

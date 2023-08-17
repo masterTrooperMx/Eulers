@@ -1,0 +1,35 @@
+@startuml
+Graph -> nodes : addEdge(source, destination)
+nodes -> Graph : nodes[] filled
+
+alt succesful case
+	Graph -> nodes : addVertex(source)
+	nodes -> Node : set(value)
+	create sourceNode
+	Node -> sourceNode : new
+	sourceNode -> Graph : sourceNode entry in Map created
+	Graph -> nodes : addVertex(destination)
+	nodes -> Node : set(value)
+	create destinationNode
+	Node -> destinationNode : new
+	destinationNode -> Graph : destinationNode entry in Map created
+	sourceNode -> sourceNode : addAdjacent(destinationNode) 
+end
+
+Graph -> nodes : removeEdge(source, destination)
+nodes -> Graph : nodes[] updated
+alt succesful case
+	Graph -> Node : get(source)
+	Node -> sourceNode : get info
+	activate sourceNode
+	sourceNode -> Node : sourceNode entry in Map
+	destroy sourceNode
+	Graph -> Node : get(destination)
+	Node -> destinationNode : get info
+	activate destinationNode
+	destinationNode -> destinationNode : removeAdjacency(sourceNode)
+	destinationNode -> Graph : adjacency entry destroyed
+	destroy destinationNode
+end
+
+@enduml

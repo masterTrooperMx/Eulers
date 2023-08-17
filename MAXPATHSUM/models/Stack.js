@@ -7,7 +7,7 @@ class Stack {
         this.items.push(element);
     }
 
-    pop(element) {
+    pop() {
         if(this.items.length == 0) {
             return "underflow";
         }
