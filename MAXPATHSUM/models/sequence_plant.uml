@@ -31,5 +31,4 @@ alt succesful case
 	destinationNode -> Graph : adjacency entry destroyed
 	destroy destinationNode
 end
-
 @enduml

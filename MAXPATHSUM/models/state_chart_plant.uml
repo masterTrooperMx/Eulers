@@ -1,0 +1,38 @@
+@startuml
+[*] --> startSearchPaths
+startSearchPaths : entry/ source
+startSearchPaths : entry/ destination
+startSearchPaths : entry/ paths
+
+state fork_state <<fork>>
+startSearchPaths --> fork_state
+fork_state --> getNodesInfo
+getNodesInfo : entry/ source
+getNodesInfo : entry/ destination
+getNodesInfo : exit/ sourceNode, destinationNode
+
+fork_state --> createNewPath
+createNewPath : entry/ paths Map array created or null
+createNewPath : exit/ Map array created
+
+state join_state <<join>>
+getNodesInfo --> join_state
+createNewPath --> join_state
+
+join_state --> checkSourceDestinationNodes
+state c1 <<choice>>
+checkSourceDestinationNodes --> c1
+c1 --> sameNodes : [source == destination]
+c1 --> differentNodes : [source != destination]
+sameNodes --> returnPathsKeys
+returnPathsKeys : exit/ paths Map keys
+returnPathsKeys --> [*]
+differentNodes --> addPaths
+addPaths : entry/ sourceNode
+addPaths : exit/ paths updated
+addPaths --> loopAdjacencyList
+loopAdjacencyList : entry/ adjacency list
+loopAdjacencyList : exit/ startSearchPaths w/ Nodes of list
+loopAdjacencyList --> startSearchPaths
+loopAdjacencyList --> checkSourceDestinationNodes
+@enduml
