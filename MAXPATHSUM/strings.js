@@ -16,3 +16,6 @@ function first_rule(str) {
 }
 console.log(input);
 console.log(first_rule(input));
+
+let fRule = input.split(' ').map((w) => w.substring(1)+w[0]+'ay').join(' ');
+console.log(fRule);
