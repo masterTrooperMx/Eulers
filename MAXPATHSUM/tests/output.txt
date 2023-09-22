@@ -1,0 +1,62 @@
+Graph {
+  nodes: Map(10) {
+    1 => Node { value: 1, adjacents: [Array] },
+    2 => Node { value: 2, adjacents: [Array] },
+    3 => Node { value: 3, adjacents: [Array] },
+    4 => Node { value: 4, adjacents: [Array] },
+    5 => Node { value: 5, adjacents: [Array] },
+    6 => Node { value: 6, adjacents: [Array] },
+    7 => Node { value: 7, adjacents: [] },
+    8 => Node { value: 8, adjacents: [] },
+    9 => Node { value: 9, adjacents: [] },
+    10 => Node { value: 10, adjacents: [] }
+  },
+  edgeDirection: Symbol(directed graph)
+}
+[
+  Node { value: 1, adjacents: [ [Node], [Node] ] },
+  Node { value: 3, adjacents: [ [Node], [Node] ] },
+  Node { value: 6, adjacents: [ [Node], [Node] ] },
+  Node { value: 10, adjacents: [] },
+  Node { value: 9, adjacents: [] },
+  Node { value: 5, adjacents: [ [Node], [Node] ] },
+  Node { value: 8, adjacents: [] },
+  Node { value: 2, adjacents: [ [Node], [Node] ] },
+  Node { value: 4, adjacents: [ [Node], [Node] ] },
+  Node { value: 7, adjacents: [] }
+]
+1-2-4-7-8-5-8-9-3-5-8-9-6-9-10-3-5-8-9-6-9-10-6-9-10-10-9-5-8-9-8-2-4-7-8-5-8-9-4-7-8-7-
+1,3,6,10,9,5,8,2,4,7
+--paths [
+  [ 1, 2, 4, 7 ],
+  [
+    1, 2, 4, 8, 1,
+    2, 5, 8, 1, 3,
+    5, 8
+  ],
+  [
+    1, 2, 5, 9, 1,
+    3, 5, 9, 1, 3,
+    6, 9
+  ],
+  [ 1, 3, 6, 10 ]
+]
+--prep [
+  [ 1, 2, 4, 7 ],
+  [ 1, 2, 4, 8 ],
+  [ 1, 2, 5, 8 ],
+  [ 1, 3, 5, 8 ],
+  [ 1, 2, 5, 9 ],
+  [ 1, 3, 5, 9 ],
+  [ 1, 3, 6, 9 ],
+  [ 1, 3, 6, 10 ]
+]
+---trans
+[ 3, 7, 2, 8 ] 20
+[ 3, 7, 2, 5 ] 17
+[ 3, 7, 4, 5 ] 19
+[ 3, 4, 4, 5 ] 16
+[ 3, 7, 4, 9 ] 23
+[ 3, 4, 4, 9 ] 20
+[ 3, 4, 6, 9 ] 22
+[ 3, 4, 6, 3 ] 16

@@ -16,6 +16,9 @@ graph.addEdge(5, 9);
 graph.addEdge(6, 9);
 graph.addEdge(6, 10);
 
+// translate nodes vals
+transList = [3, 7, 4, 2, 4, 6, 8, 5, 9, 3];
+
 console.log(graph);
 
 const dfsFromFirst = graph.dfs(first);
@@ -49,6 +52,40 @@ function plainPath (arrObj) {
     return tmp;
 }
 
+// https://stackoverflow.com/questions/20798477/how-to-find-the-indexes-of-all-occurrences-of-an-element-in-array
+function stripPaths (listOL, ini) {
+    let indices = [], tmp = [], i = -1;
+    for(const l of listOL) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+        //console.log(l);
+        while((i = l.indexOf(ini, i+1)) != -1){ // optional operator of indexOf
+            tmp.push(i);
+        }
+        indices.push([l, tmp]);
+        tmp = [];
+        i = -1;
+    }
+    return indices;
+}
+
+function preparePaths(listOL){
+    let listOut = [];
+    //console.log('...');
+    for(const tmp of listOL) {
+        let [l, idx] = tmp;
+        //console.log(l, idx);
+        if(idx.length != 1) {
+            let lon = idx[1] - idx[0];
+            for(let i = 0; i < idx.length; i++){
+                //console.log(l, idx[i], lon, l.slice(idx[i], lon));
+                listOut.push(l.splice(0, lon)); // takes first lon elements and shorten array
+            }
+        } else {
+            listOut.push(l);
+        }
+    }
+    return listOut;
+}
+
 let paths = [];
 const vals = dfsPathsArr.map(node => node.value);
 console.log(`${vals}`);
@@ -64,5 +101,23 @@ paths.push(plainPath(aP));
 aP = graph.findAllPaths(1, 10, null);
 paths.push(plainPath(aP));
 //console.log(aP);
-
-console.log(paths);
+console.log('--paths',paths);
+const strPaths = stripPaths(paths, 1);
+//console.log('--strip', strPaths);
+const singlePaths = preparePaths(strPaths);
+console.log('--prep', singlePaths);
+// translate all
+let transPaths = [];
+singlePaths.forEach(arr => {
+    let tmp = [];
+    for(let i = 0; i < arr.length; i++){
+        tmp.push(transList[arr[i]-1]);
+    }
+    transPaths.push(tmp);
+    tmp = [];
+});
+// sum all
+console.log('---trans');
+transPaths.forEach(arr => {
+    console.log(arr, arr.reduce((x,y) => x+y));
+});
